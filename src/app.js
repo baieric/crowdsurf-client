@@ -40,6 +40,8 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/login', function(req, res) {
 
+  var home = 'http://localhost:8888/home';
+
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
@@ -50,9 +52,13 @@ app.get('/login', function(req, res) {
       response_type: 'code',
       client_id: client_id,
       scope: scope,
-      redirect_uri: redirect_uri,
+      redirect_uri: home,
       state: state
     }));
+});
+
+app.get('/home', function(req, res){
+  res.redirect('home.html');
 });
 
 app.get('/callback', function(req, res) {
