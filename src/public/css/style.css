@@ -2,6 +2,10 @@ body {
 	background-color: #123;
 }
 
-h1{
+*{
 	color: #FFF;
+}
+.inline{
+	display: inline-block;
+	vertical-align: text-top;
 }
