@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+	<title>Crowdsurfr</title>
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>
+<<<<<<< HEAD
+	<script src="main.js"></script>
+=======
+	<script type="text/jsx" src="history.jsx"></script>
+>>>>>>> 1fda6a26d7e7eeea110968c22397ed0fbc861ff8
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+</body>
+</html>

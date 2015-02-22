@@ -42,7 +42,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/login', function(req, res) {
 
-  var home = 'http://localhost:8888/#/';
+  var home = 'http://localhost:8888/callback';
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
