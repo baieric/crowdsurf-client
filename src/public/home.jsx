@@ -50,8 +50,8 @@ var Home = React.createClass({
 				<div id="navbar" className="collapse navbar-collapse">
 		        <ul className="nav navbar-nav">
 		          <li className="active"><a href="#">Home</a></li>
-		          <li><a href="#about">Playlists</a></li>
-		          <li><a href="#contact">Friends</a></li>
+		          <li><a href="#create">Create Playlist</a></li>
+		          <li><a href="#friends">Friends</a></li>
 		        </ul>
 		      </div>
 				<div className="container">

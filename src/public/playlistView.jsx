@@ -1,7 +1,7 @@
 // temp hardcoded playlist
 var playlist = {
 	"id": 1,
-	"created_by": "wizzler",
+	// "created_by": "wizzler",
 	"title": "Awesome playlist",
 	"thumb": "some.jpg",
 	"timestamp": 1234567890,
@@ -121,7 +121,7 @@ var tracks = {
   } ]
 }
 
-var author = {
+var authors = [{
  "display_name" : "Lilla Namo",
  "external_urls" : {
  "spotify" : "https://open.spotify.com/user/tuggareutangranser"
@@ -139,7 +139,27 @@ var author = {
  } ],
  "type" : "user",
  "uri" : "spotify:user:tuggareutangranser"
-}
+},
+{
+ "display_name" : null,
+ "external_urls" : {
+ "spotify" : "https://open.spotify.com/user/tuggareutangranser"
+ },
+ "followers" : {
+ "href" : null,
+ "total" : 4561
+ },
+ "href" : "https://api.spotify.com/v1/users/tuggareutangranser",
+ "id" : "tuggareutangranser",
+ "images" : [ {
+ "height" : null,
+ "url" : "http://profile-images.scdn.co/artists/default/d4f208d4d49c6f3e1363765597d10c4277f5b74f",
+ "width" : null
+ } ],
+ "type" : "user",
+ "uri" : "spotify:user:tuggareutangranser"
+},
+]
 
 var current_user = "efaulte"
 
@@ -158,36 +178,30 @@ var Track = React.createClass({
 	}
 });
 
+var Author = React.createClass({
+  render: function(){
+    return(
+      <a href={"/user/" + this.props.id}>{this.props.name}</a>
+    )
+  }
+});
+
 var Playlist = React.createClass({
 	getInitialState: function(){
-		// access_token = "BQB3MEuAGTr9IoyP3SWFGUacE2uhKvHjkXy9k-ByZ_ZVuuiNGYRWV_iSosd74hB3jbbn_0HJHTzqBw-wZ5zjhITh5kRuDfFqWqp5YjxCR6b2tyMXqAzb-9vLE1Y0CH8JTfGGncwgFHQ0l06hlo9Y98mJBgRg5ag4wGcY5sq4RjS1ebJSZLQpzVAR6i9o4a5JobrL2YdzGq9Ksbk";
-		// var author;
-		// var collaborators = [];
-		// playlist.collaborators.map(function (collaborator) {
-		// 	$.get('https://api.spotify.com/v1/users/'+collaborator,
-		// 		{ headers: {'Authorization': 'Bearer ' + access_token} },
-		// 		function(result){
-		// 			var user = result;
-		// 			collaborators.push(user);
-		// 			if(collaborator == playlist.created_by){
-		// 				author = user;
-		// 			}
-		// 	},
-
-		// 	);
-		// })
-
-		// var tracks = [];
-		// $.get('https://api.spotify.com/v1/tracks?ids='+playlist.tracks.slice(0, 50).join(),
-		// 	{ headers: {'Authorization': 'Bearer ' + access_token} },
-		// 	function(result){
-		// 		tracks = result;
-		// 	});
-
-		// console.log(author);
 		console.log(tracks.tracks);
-		var author_name = author.display_name ? author.display_name : author.id;
-    var isOwner = (playlist.created_by == current_user);
+    var authorInfos = [];
+    var isOwner = false;
+    for (var i = authors.length - 1; i >= 0; i--) {
+      var name = authors[i].display_name ? authors[i].display_name : authors[i].id;
+      var author_info = { "display_name": name, "id": authors[i].id };
+      authorInfos.push(author_info);
+      if(playlist.collaborators[i] == current_user){
+        isOwner = true;
+      }
+    };
+
+    console.log(authorInfos);
+
     var editUrl;
     var editLabel;
 
@@ -201,8 +215,7 @@ var Playlist = React.createClass({
 
 		return {
 			playlist: playlist,
-			author: author_name,
-			//collaborators: collaborators,
+			authorInfos: authorInfos,
 			tracks: tracks.tracks,
       editLabel: editLabel,
       editUrl: editUrl
@@ -216,9 +229,12 @@ var Playlist = React.createClass({
 				</div>
 				<div className="inline">
 					<h2>{this.state.playlist.title}</h2>
-					<p>By <a href={"/user/" + this.state.playlist.created_by}>
-						{this.state.author}
-					</a></p>
+					<p>By 
+          {this.state.authorInfos.map(function (author){
+            return(
+              <span> <Author name={author.display_name} id={author.id} />, </span>
+          )})}
+          </p>
 				</div>
 				<div>
 					<a href={this.state.editUrl} className="btn btn-primary">{this.state.editLabel}</a>
