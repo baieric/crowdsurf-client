@@ -1,5 +1,5 @@
 body {
-	background-color: #123;
+	background-color: #DAE1F7;
 }
 
 *{
@@ -13,4 +13,15 @@ body {
 }
 .form-control{
 	min-width: 300px;
+}
+.nav{
+	display: inline-block;
+	height:100%;
+	font-size: 2em;
+}
+
+#navbar{
+	background-color:#AAB0BF;
+	display: block;
+	width: 100%;
 }

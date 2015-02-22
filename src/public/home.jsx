@@ -43,16 +43,27 @@ var Home = React.createClass({
 	getInitialState: function(){
 		return { playlists: playlists }
 	},
+	//Render container for page
 	render: function(){
-		return (
-			<div className="container">
-				{this.state.playlists.map(function (playlist){
-					return(
-						<Playlist id={playlist.id} thumb={playlist.thumb} title={playlist.title} />
-				)})}
+		return (		
+			<div>
+				<div id="navbar" className="collapse navbar-collapse">
+		        <ul className="nav navbar-nav">
+		          <li className="active"><a href="#">Home</a></li>
+		          <li><a href="#about">Playlists</a></li>
+		          <li><a href="#contact">Friends</a></li>
+		        </ul>
+		      </div>
+				<div className="container">
+					<h1>CrowdSurfr</h1>
+						{this.state.playlists.map(function (playlist){
+							return(
+								<Playlist id={playlist.id} thumb={playlist.thumb} title={playlist.title} />
+							)
+						})}
 			</div>
+		</div>		
 		)
 	}
 })
-
 React.render(<Home playlists={playlists}></Home>, document.body);
