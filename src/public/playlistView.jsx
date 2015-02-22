@@ -184,10 +184,11 @@ var Playlist = React.createClass({
 
 		// console.log(author);
 		console.log(tracks.tracks);
+		var author_name = author.display_name ? author.display_name : author.id;
 
 		return {
 			playlist: playlist,
-			author: author,
+			author: author_name,
 			//collaborators: collaborators,
 			tracks: tracks.tracks
 		}
@@ -202,7 +203,7 @@ var Playlist = React.createClass({
 				<div className="inline">
 					<h2>{this.state.playlist.title}</h2>
 					<p>By <a href={"/user/" + this.state.playlist.created_by}>
-						{this.state.author.display_name}
+						{this.state.author}
 					</a></p>
 				</div>
 				<div>
