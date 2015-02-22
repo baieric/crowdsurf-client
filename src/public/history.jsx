@@ -54,13 +54,13 @@ var diffs = {
 var Playlist = React.createClass({
 	render: function(){
 		return (
-			<div>
+			<div className="playlist-card">
 				<div className="inline">
-					<img src={this.props.thumb}/>
+					<img className="playlist-thumb" src={this.props.thumb}/>
 				</div>
 				<div className="inline">
 					<a href={"/playlist/" + this.props.id + "/diff/" + this.props.revision_id} className="playlistTitle">
-					{this.props.timestamp}
+					{"Revision " + this.props.timestamp}
 					</a>
 				</div>
 			</div>
@@ -78,6 +78,13 @@ var History = React.createClass({
 	//Render container for page
 	render: function(){
 		return (		
+			<div>
+      <div id="navbar" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+              <li className="active"><a href="#">Home</a></li>
+              <li><a href="#create">Create Playlist</a></li>
+            </ul>
+          </div>
 			<div className="container">
 				<h1>History of {playlists[0].title}</h1>
 				<div className="col-xs-2">
@@ -91,6 +98,7 @@ var History = React.createClass({
 					<div id="diff"></div>
 				</div>
 			</div>	
+			</div>
 		)
 	}
 })

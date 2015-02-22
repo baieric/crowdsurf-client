@@ -235,6 +235,13 @@ var Playlist = React.createClass({
 	},
 	render: function(){
 		return (
+      <div>
+      <div id="navbar" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+              <li className="active"><a href="#">Home</a></li>
+              <li><a href="#create">Create Playlist</a></li>
+            </ul>
+          </div>
 			<div className="container">
 				<div className="inline">
 					<img src={this.state.playlist.thumb}/>
@@ -276,6 +283,7 @@ var Playlist = React.createClass({
 					)})}
 				</table>
 			</div>
+      </div>
 		)
 	}
 })

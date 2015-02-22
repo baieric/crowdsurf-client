@@ -1,14 +1,16 @@
-var playlist = {
-	"id": 1,
-	"created_by": "wizzler",
-	"title": "Awesome playlist",
-	"thumb": "some.jpg",
-	"timestamp": 1234567890,
-	"parent": null,
-	"tags": ["rock", "pop", "electronic"],
-	"collaborators": ["wizzler", "efaulte"],
-	"tracks": ["5Z7ygHQo02SUrFmcgpwsKW", "1x6ACsKV4UdWS2FMuPFUiT", "4bi73jCM02fMpkI11Lqmfe"]
-}
+// var playlist = {
+// 	"id": 1,
+// 	"created_by": "wizzler",
+// 	"title": "Awesome playlist",
+// 	"thumb": "some.jpg",
+// 	"timestamp": 1234567890,
+// 	"parent": null,
+// 	"tags": ["rock", "pop", "electronic"],
+// 	"collaborators": ["wizzler", "efaulte"],
+// 	"tracks": ["5Z7ygHQo02SUrFmcgpwsKW", "1x6ACsKV4UdWS2FMuPFUiT", "4bi73jCM02fMpkI11Lqmfe"]
+// }
+
+var playlist = null;
 
 var tracks = {
 	"tracks": []
@@ -192,21 +194,36 @@ var Playlist = React.createClass({
       authors = [];
       authors.push(current_user);
     }
+    var titleLabel;
+    if(playlist == null){
+      titleLabel = "Create Playlist";
+    }else{
+      titleLabel = "Edit " + playlist.title;
+    }
 		return {
 			playlist: playlist,
       authors: authors,
-			tracks: tracks.tracks
+			tracks: tracks.tracks,
+      titleLabel: titleLabel
 		}
 	},
 	render: function(){
 		var that = this;
 		return (
+      <div>
+      <div id="navbar" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+              <li className="active"><a href="#">Home</a></li>
+              <li><a href="#create">Create Playlist</a></li>
+            </ul>
+          </div>
 			<div className="container">
+        <h2>{this.state.titleLabel}</h2>
 				<div className="input-group">
 					<input type="text" className="form-control" placeholder="Playlist Title"/>
 				</div>
 
-        <div>
+        <div className="contributor-list">
         <p>Contributors:
           {this.state.authors.map(function (author){
             return(
@@ -239,6 +256,7 @@ var Playlist = React.createClass({
 				</table>
 				<a href={"/save"} className="btn btn-primary">Save</a>
 			</div>
+      </div>
 		)
 	}
 })
