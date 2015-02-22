@@ -140,7 +140,7 @@ var Track = React.createClass({
 	}
 });
 
-var Playlist = React.createClass({
+module.exports = React.createClass({
 	addSong: function(event){
 		var that = this;
 		var keyPressed = event.keyCode;
@@ -200,4 +200,4 @@ var Playlist = React.createClass({
 })
 
 
-React.render(<Playlist playlist={playlist}></Playlist>, document.body);
+ //<Playlist playlist={playlist}></Playlist>;

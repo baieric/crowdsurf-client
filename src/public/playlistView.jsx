@@ -186,7 +186,7 @@ var Author = React.createClass({
   }
 });
 
-var Playlist = React.createClass({
+module.exports = React.createClass({
 	getInitialState: function(){
 		console.log(tracks.tracks);
     var authorInfos = [];
@@ -267,4 +267,4 @@ var Playlist = React.createClass({
 	}
 })
 
-React.render(<Playlist playlist={playlist}></Playlist>, document.body);
+ //<Playlist playlist={playlist}></Playlist>;

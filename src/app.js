@@ -42,7 +42,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/login', function(req, res) {
 
-  var home = 'http://localhost:8888/home';
+  var home = 'http://localhost:8888/#/';
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -59,8 +59,8 @@ app.get('/login', function(req, res) {
     }));
 });
 
-app.get('/home', function(req, res){
-  res.redirect('.html');
+app.get('/#/login', function(req, res){
+  //res.redirect('.html');
 });
 
 app.get('/callback', function(req, res) {

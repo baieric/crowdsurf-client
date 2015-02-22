@@ -39,7 +39,7 @@ var Playlist = React.createClass({
 	}
 })
 
-var Home = React.createClass({
+module.exports = React.createClass({
 	getInitialState: function(){
 		return { playlists: playlists }
 	},
@@ -66,4 +66,4 @@ var Home = React.createClass({
 		)
 	}
 })
-React.render(<Home playlists={playlists}></Home>, document.body);
+ //<Home playlists={playlists}></Home>;

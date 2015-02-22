@@ -41,7 +41,7 @@ var Playlist = React.createClass({
 	}
 })
 
-var History = React.createClass({
+module.exports = React.createClass({
 	getInitialState: function(){
 		return { playlists: playlists }
 	},
@@ -59,4 +59,4 @@ var History = React.createClass({
 		)
 	}
 })
-React.render(<History playlists={playlists}></History>, document.body);
+//<History playlists={playlists}></History>;
