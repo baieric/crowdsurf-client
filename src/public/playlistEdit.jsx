@@ -143,21 +143,22 @@ var Track = React.createClass({
 var Playlist = React.createClass({
 	addSong: function(event){
 		var that = this;
+		var keyPressed = event.keyCode;
 		var access_token = "BQB3MEuAGTr9IoyP3SWFGUacE2uhKvHjkXy9k-ByZ_ZVuuiNGYRWV_iSosd74hB3jbbn_0HJHTzqBw-wZ5zjhITh5kRuDfFqWqp5YjxCR6b2tyMXqAzb-9vLE1Y0CH8JTfGGncwgFHQ0l06hlo9Y98mJBgRg5ag4wGcY5sq4RjS1ebJSZLQpzVAR6i9o4a5JobrL2YdzGq9Ksbk";
-		if(event.keyCode == 13){
-			var search = $('#songInput').val();
-			 $.get('https://api.spotify.com/v1/search?q='+ search + '&type=track&limit=5',
-				{ headers: {'Authorization': 'Bearer ' + access_token} },
-				function(result){
-					var song = result.tracks.items[0];
-					console.log(song);
-					console.log(that.state);
+		var search = $('#songInput').val();
+		 $.get('https://api.spotify.com/v1/search?q='+ search + '&type=track&limit=5',
+			{ headers: {'Authorization': 'Bearer ' + access_token} },
+			function(result){
+				var song = result.tracks.items[0];
+				if(keyPressed == 13){
 					that.state.tracks.push(song);
 					that.setState({tracks: that.state.tracks});
 					$('#songInput').val('');
-			});
-			
-		}
+				}else{
+					// autocomplete
+				}
+				
+		});
 	},
 	getInitialState: function(){
 		return {
@@ -178,7 +179,7 @@ var Playlist = React.createClass({
 				</div>
 
 				<div className="input-group">
-					<input type="text" id="songInput" className="form-control" placeholder="Add songs" onKeyDown={that.addSong.bind(event)} />
+					<input type="text" id="songInput" className="form-control" placeholder="Add songs" onKeyUp={that.addSong.bind(event)} />
 
 				</div>
 				<table className="table">
