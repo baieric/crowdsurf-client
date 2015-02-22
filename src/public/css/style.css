@@ -12,3 +12,53 @@ body {
 .form-control{
 	min-width: 300px;
 }
+
+.jumbotron{
+	background-color: #012;
+	text-align: center;
+}
+
+.playlist-card{
+	padding: 10px;
+	background-color: #012;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	display: inline-block;
+	width: 45%;
+	min-width: 500px;
+}
+
+.playlist-thumb{
+	margin-right: 20px;
+}
+
+#navbar{
+	background-color: #012;
+	margin-bottom: 10px;
+}
+
+.btn, input{
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+iframe{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+table{
+	margin-top: 15px;
+}
+.contributor-list{
+	margin-top: 10px;
+}
+
+a{
+	color:#6AE;
+}
+
+.view-diff{
+	color:#999;
+}

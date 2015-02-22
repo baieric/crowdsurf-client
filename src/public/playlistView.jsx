@@ -5,7 +5,7 @@ var playlist = {
 	"title": "Awesome playlist",
 	"thumb": "some.jpg",
 	"timestamp": 1234567890,
-	"parent": null,
+	"parent": 34,
 	"tags": ["rock", "pop", "electronic"],
 	"collaborators": ["wizzler", "efaulte"],
 	"tracks": ["5Z7ygHQo02SUrFmcgpwsKW", "1x6ACsKV4UdWS2FMuPFUiT", "4bi73jCM02fMpkI11Lqmfe"]
@@ -213,22 +213,42 @@ module.exports = React.createClass({
       editUrl = "/playlist/" + playlist.id + "/fork";
     }
 
+    var parentLabel;
+    var parentUrl;
+    if(playlist.parent == null){
+      parentLabel = "";
+      parentUrl = "";
+    }else{
+      parentLabel = "Forked from " + playlist.parent;
+      parentUrl = "/playlists/" + playlist.parent;
+    }
+
 		return {
 			playlist: playlist,
 			authorInfos: authorInfos,
 			tracks: tracks.tracks,
       editLabel: editLabel,
-      editUrl: editUrl
+      editUrl: editUrl,
+      parentLabel: parentLabel,
+      parentUrl: parentUrl
 		}
 	},
 	render: function(){
 		return (
+      <div>
+      <div id="navbar" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+              <li className="active"><a href="#">Home</a></li>
+              <li><a href="#create">Create Playlist</a></li>
+            </ul>
+          </div>
 			<div className="container">
 				<div className="inline">
 					<img src={this.state.playlist.thumb}/>
 				</div>
 				<div className="inline">
 					<h2>{this.state.playlist.title}</h2>
+          <a href={this.state.parentUrl}>{this.state.parentLabel}</a>
 					<p>By 
           {this.state.authorInfos.map(function (author){
             return(
@@ -263,6 +283,7 @@ module.exports = React.createClass({
 					)})}
 				</table>
 			</div>
+      </div>
 		)
 	}
 })

@@ -1,18 +1,26 @@
-var playlist = {
-	"id": 1,
-	"created_by": "wizzler",
-	"title": "Awesome playlist",
-	"thumb": "some.jpg",
-	"timestamp": 1234567890,
-	"parent": null,
-	"tags": ["rock", "pop", "electronic"],
-	"collaborators": ["wizzler", "efaulte"],
-	"tracks": ["5Z7ygHQo02SUrFmcgpwsKW", "1x6ACsKV4UdWS2FMuPFUiT", "4bi73jCM02fMpkI11Lqmfe"]
-}
+// var playlist = {
+// 	"id": 1,
+// 	"created_by": "wizzler",
+// 	"title": "Awesome playlist",
+// 	"thumb": "some.jpg",
+// 	"timestamp": 1234567890,
+// 	"parent": null,
+// 	"tags": ["rock", "pop", "electronic"],
+// 	"collaborators": ["wizzler", "efaulte"],
+// 	"tracks": ["5Z7ygHQo02SUrFmcgpwsKW", "1x6ACsKV4UdWS2FMuPFUiT", "4bi73jCM02fMpkI11Lqmfe"]
+// }
+
+var playlist = null;
 
 var tracks = {
 	"tracks": []
 }
+
+var authors = [];
+
+var contributorsAdded = [];
+
+var current_user = "efaulte";
 
 /*
 var tracks = {
@@ -140,39 +148,97 @@ var Track = React.createClass({
 	}
 });
 
+<<<<<<< HEAD
 module.exports = React.createClass({
 	addSong: function(event){
+=======
+var Author = React.createClass({
+  render: function(){
+    return(
+      <a href={"/user/" + this.props.id}>{this.props.name}</a>
+    )
+  }
+});
+
+var Playlist = React.createClass({
+  addSong: function(event){
+    var that = this;
+    var keyPressed = event.keyCode;
+    var access_token = "BQB3MEuAGTr9IoyP3SWFGUacE2uhKvHjkXy9k-ByZ_ZVuuiNGYRWV_iSosd74hB3jbbn_0HJHTzqBw-wZ5zjhITh5kRuDfFqWqp5YjxCR6b2tyMXqAzb-9vLE1Y0CH8JTfGGncwgFHQ0l06hlo9Y98mJBgRg5ag4wGcY5sq4RjS1ebJSZLQpzVAR6i9o4a5JobrL2YdzGq9Ksbk";
+    var search = $('#songInput').val();
+     $.get('https://api.spotify.com/v1/search?q='+ search + '&type=track&limit=5',
+      { headers: {'Authorization': 'Bearer ' + access_token} },
+      function(result){
+        var song = result.tracks.items[0];
+        if(keyPressed == 13){
+          that.state.tracks.push(song);
+          that.setState({tracks: that.state.tracks});
+          $('#songInput').val('');
+        }else{
+          // autocomplete
+        }
+        
+    });
+  },
+  // allows any input... check validity with spotify api if there's time
+	addContributor: function(event){
+>>>>>>> 1fda6a26d7e7eeea110968c22397ed0fbc861ff8
 		var that = this;
 		var keyPressed = event.keyCode;
 		var access_token = "BQB3MEuAGTr9IoyP3SWFGUacE2uhKvHjkXy9k-ByZ_ZVuuiNGYRWV_iSosd74hB3jbbn_0HJHTzqBw-wZ5zjhITh5kRuDfFqWqp5YjxCR6b2tyMXqAzb-9vLE1Y0CH8JTfGGncwgFHQ0l06hlo9Y98mJBgRg5ag4wGcY5sq4RjS1ebJSZLQpzVAR6i9o4a5JobrL2YdzGq9Ksbk";
-		var search = $('#songInput').val();
-		 $.get('https://api.spotify.com/v1/search?q='+ search + '&type=track&limit=5',
-			{ headers: {'Authorization': 'Bearer ' + access_token} },
-			function(result){
-				var song = result.tracks.items[0];
-				if(keyPressed == 13){
-					that.state.tracks.push(song);
-					that.setState({tracks: that.state.tracks});
-					$('#songInput').val('');
-				}else{
-					// autocomplete
-				}
-				
-		});
+		var user = $('#contributorInput').val();
+		if(keyPressed == 13){
+      contributorsAdded.push(user);
+      that.state.authors.push(user);
+      that.setState({authors: that.state.authors});
+      $('#contributorInput').val('');
+    }
 	},
 	getInitialState: function(){
+    if(authors.length == 0){ // no authors because you're creating a new playlist
+      authors = [];
+      authors.push(current_user);
+    }
+    var titleLabel;
+    if(playlist == null){
+      titleLabel = "Create Playlist";
+    }else{
+      titleLabel = "Edit " + playlist.title;
+    }
 		return {
 			playlist: playlist,
-			tracks: tracks.tracks
+      authors: authors,
+			tracks: tracks.tracks,
+      titleLabel: titleLabel
 		}
 	},
 	render: function(){
 		var that = this;
 		return (
+      <div>
+      <div id="navbar" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+              <li className="active"><a href="#">Home</a></li>
+              <li><a href="#create">Create Playlist</a></li>
+            </ul>
+          </div>
 			<div className="container">
+        <h2>{this.state.titleLabel}</h2>
 				<div className="input-group">
 					<input type="text" className="form-control" placeholder="Playlist Title"/>
 				</div>
+
+        <div className="contributor-list">
+        <p>Contributors:
+          {this.state.authors.map(function (author){
+            return(
+              <span> <Author id={author} name={author} />, </span>
+          )})}
+        </p>
+        </div>
+        <div className="input-group">
+          <input type="text" id="contributorInput" className="form-control" placeholder="Add a contributor" onKeyUp={that.addContributor.bind(event)} />
+        </div>
 
 				<div className="input-group">
 					<input type="text" className="form-control" placeholder="Tags (separated by commas)"/>
@@ -195,6 +261,7 @@ module.exports = React.createClass({
 				</table>
 				<a href={"/save"} className="btn btn-primary">Save</a>
 			</div>
+      </div>
 		)
 	}
 })

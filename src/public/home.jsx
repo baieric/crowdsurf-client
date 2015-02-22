@@ -24,15 +24,29 @@ var playlists = [
 	}
 ]
 
+var Author = React.createClass({
+  render: function(){
+    return(
+      <a href={"/user/" + this.props.id}>{this.props.name}</a>
+    )
+  }
+});
+
 var Playlist = React.createClass({
 	render: function(){
 		return (
-			<div>
+			<div className="playlist-card">
 				<div className="inline">
-					<img src={this.props.thumb}/>
+					<img className="playlist-thumb" src={this.props.thumb}/>
 				</div>
 				<div className="inline">
-					<a href={"/playlist/" + this.props.id} className="playlistTitle">{this.props.title}</a>
+					<h4><a href={"/playlist/" + this.props.id} className="playlistTitle">{this.props.title}</a></h4>
+					<p>By 
+						{this.props.authors.map(function (author){
+			            return(
+			              <span> <Author name={author} id={author} />, </span>
+			          )})}
+					</p>
 				</div>
 			</div>
 		)
@@ -51,14 +65,13 @@ module.exports = React.createClass({
 		        <ul className="nav navbar-nav">
 		          <li className="active"><a href="#">Home</a></li>
 		          <li><a href="#create">Create Playlist</a></li>
-		          <li><a href="#friends">Friends</a></li>
 		        </ul>
 		      </div>
 				<div className="container">
 					<h1>CrowdSurfr</h1>
 						{this.state.playlists.map(function (playlist){
 							return(
-								<Playlist id={playlist.id} thumb={playlist.thumb} title={playlist.title} />
+								<Playlist id={playlist.id} thumb={playlist.thumb} title={playlist.title} authors={playlist.collaborators} />
 							)
 						})}
 			</div>
