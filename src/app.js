@@ -9,6 +9,8 @@
 
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
+var React = require('react');
+var ReactRouter = require('react-router');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
@@ -58,7 +60,7 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/home', function(req, res){
-  res.redirect('home.html');
+  res.redirect('.html');
 });
 
 app.get('/callback', function(req, res) {
