@@ -26,6 +26,31 @@ var playlists = [
 	}
 ]
 
+var diffs = {
+  "_id":"auto-generated",
+  "title":"string",
+  "type":"string",
+  "thumb":"url string",
+  "timestamp":"int",
+  "parent":"id of parent",
+  "tags":["array of tags"],
+  "collaborators":["array of collaborators"],
+  "created_by":"spotify id of user",
+  "diffs":[
+    {
+      "commit_id":"int generated hash",
+      "timestamp:":"int timestamp",
+      "changes":[
+        {
+          "type":"add or remove",
+          "song_id":"spotify song_id",
+          "index":"int index"
+        }
+      ]
+    }
+  ]
+}
+
 var Playlist = React.createClass({
 	render: function(){
 		return (
@@ -45,18 +70,26 @@ var Playlist = React.createClass({
 
 var History = React.createClass({
 	getInitialState: function(){
-		return { playlists: playlists }
+		return {
+			playlists: playlists,
+			diff: null
+		}
 	},
 	//Render container for page
 	render: function(){
 		return (		
 			<div className="container">
 				<h1>History of {playlists[0].title}</h1>
+				<div className="col-xs-2">
 					{this.state.playlists.map(function (playlist){
 						return(
 							<Playlist revision_id={playlist.revision_id} id={playlist.id} thumb={playlist.thumb} timestamp={playlist.timestamp} />
 						)
 					})}
+				</div>
+				<div className="col-xs-2">
+					<div id="diff"></div>
+				</div>
 			</div>	
 		)
 	}
