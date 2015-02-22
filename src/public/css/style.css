@@ -1,11 +1,9 @@
 body {
-	background-color: #DAE1F7;
+	background-color: #123;
 }
 
 *{
 	color: #FFF;
-	margin-right: 10px;
-	margin-bottom: 10px;
 }
 .inline{
 	display: inline-block;
@@ -13,15 +11,4 @@ body {
 }
 .form-control{
 	min-width: 300px;
-}
-.nav{
-	display: inline-block;
-	height:100%;
-	font-size: 2em;
-}
-
-#navbar{
-	background-color:#AAB0BF;
-	display: block;
-	width: 100%;
 }

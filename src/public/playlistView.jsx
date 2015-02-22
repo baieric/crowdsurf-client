@@ -1,5 +1,3 @@
-
-
 // temp hardcoded playlist
 var playlist = {
 	"id": 1,
@@ -143,6 +141,10 @@ var author = {
  "uri" : "spotify:user:tuggareutangranser"
 }
 
+var current_user = "efaulte"
+
+// end of temp stuff
+
 var Track = React.createClass({
 
 	render: function(){
@@ -185,16 +187,28 @@ var Playlist = React.createClass({
 		// console.log(author);
 		console.log(tracks.tracks);
 		var author_name = author.display_name ? author.display_name : author.id;
+    var isOwner = (playlist.created_by == current_user);
+    var editUrl;
+    var editLabel;
+
+    if(isOwner){
+      editLabel = "Edit";
+      editUrl = "/playlist/" + playlist.id + "/edit";
+    }else{
+      editLabel = "Fork This Playlist";
+      editUrl = "/playlist/" + playlist.id + "/fork";
+    }
 
 		return {
 			playlist: playlist,
 			author: author_name,
 			//collaborators: collaborators,
-			tracks: tracks.tracks
+			tracks: tracks.tracks,
+      editLabel: editLabel,
+      editUrl: editUrl
 		}
 	},
 	render: function(){
-		var count = 0;
 		return (
 			<div className="container">
 				<div className="inline">
@@ -207,9 +221,9 @@ var Playlist = React.createClass({
 					</a></p>
 				</div>
 				<div>
-					<a href={"/playlist/" + this.state.playlist.id + "/fork"} className="btn btn-primary">Fork</a>
-					<a href={"/playlist/" + this.state.playlist.id + "/history"} className="btn btn-primary">Fork History</a>
-					<a href={"/playlist/" + this.state.playlist.id + "/diffs"} className="btn btn-primary">Diffs</a>
+					<a href={this.state.editUrl} className="btn btn-primary">{this.state.editLabel}</a>
+					<a href={"/playlist/" + this.state.playlist.id + "/forks"} className="btn btn-primary">Forks</a>
+					<a href={"/playlist/" + this.state.playlist.id + "/history"} className="btn btn-primary">History</a>
 				</div>
 				<iframe src={
 						"https://embed.spotify.com/?uri=spotify:trackset:"
