@@ -1,0 +1,64 @@
+// temp hardcoded playlists
+var playlists = [
+	{
+		 "id": 1,
+		 "revision_id": 1,
+		 "created_by": 1,
+		 "title": "Awesome playlist",
+		 "thumb": "some.jpg",
+		 "timestamp": 1424586739,
+		 "parent": null,
+		 "tags": ["rock", "pop", "electronic"],
+		 "collaborators": [1, 2, 3],
+		 "tracks": [1, 2, 3, 4, 5]
+	},
+	{
+		 "id": 1,
+		 "revision_id": 2,
+		 "created_by": 2,
+		 "title": "my jams",
+		 "thumb": "new.jpg",
+		 "timestamp": 1424586747,
+		 "parent": 1,
+		 "tags": ["rock", "pop", "electronic"],
+		 "collaborators": [1, 2, 3],
+		 "tracks": [1, 2, 3, 4, 5]
+	}
+]
+
+var Playlist = React.createClass({
+	render: function(){
+		return (
+			<div>
+				<div className="inline">
+					<img src={this.props.thumb}/>
+				</div>
+				<div className="inline">
+					<a href={"/playlist/" + this.props.id + "/diff/" + this.props.revision_id} className="playlistTitle">
+					{this.props.timestamp}
+					</a>
+				</div>
+			</div>
+		)
+	}
+})
+
+var History = React.createClass({
+	getInitialState: function(){
+		return { playlists: playlists }
+	},
+	//Render container for page
+	render: function(){
+		return (		
+			<div className="container">
+				<h1>History of {playlists[0].title}</h1>
+					{this.state.playlists.map(function (playlist){
+						return(
+							<Playlist revision_id={playlist.revision_id} id={playlist.id} thumb={playlist.thumb} timestamp={playlist.timestamp} />
+						)
+					})}
+			</div>	
+		)
+	}
+})
+React.render(<History playlists={playlists}></History>, document.body);
