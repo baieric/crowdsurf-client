@@ -4,8 +4,13 @@ body {
 
 *{
 	color: #FFF;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 .inline{
 	display: inline-block;
 	vertical-align: text-top;
+}
+.form-control{
+	min-width: 300px;
 }
