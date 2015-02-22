@@ -148,10 +148,7 @@ var Track = React.createClass({
 	}
 });
 
-<<<<<<< HEAD
-module.exports = React.createClass({
-	addSong: function(event){
-=======
+
 var Author = React.createClass({
   render: function(){
     return(
@@ -160,7 +157,7 @@ var Author = React.createClass({
   }
 });
 
-var Playlist = React.createClass({
+module.exports = React.createClass({
   addSong: function(event){
     var that = this;
     var keyPressed = event.keyCode;
@@ -182,7 +179,6 @@ var Playlist = React.createClass({
   },
   // allows any input... check validity with spotify api if there's time
 	addContributor: function(event){
->>>>>>> 1fda6a26d7e7eeea110968c22397ed0fbc861ff8
 		var that = this;
 		var keyPressed = event.keyCode;
 		var access_token = "BQB3MEuAGTr9IoyP3SWFGUacE2uhKvHjkXy9k-ByZ_ZVuuiNGYRWV_iSosd74hB3jbbn_0HJHTzqBw-wZ5zjhITh5kRuDfFqWqp5YjxCR6b2tyMXqAzb-9vLE1Y0CH8JTfGGncwgFHQ0l06hlo9Y98mJBgRg5ag4wGcY5sq4RjS1ebJSZLQpzVAR6i9o4a5JobrL2YdzGq9Ksbk";
